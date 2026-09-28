@@ -37,7 +37,7 @@ jobs:
       - name: Build de la imagen
         run: docker build -t mgm-shield:${{ github.sha }} .
       - name: Trivy (imagen)
-        uses: aquasecurity/trivy-action@0.74.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: mgm-shield:${{ github.sha }}
           severity: CRITICAL,HIGH
