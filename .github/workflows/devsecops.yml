@@ -1,0 +1,57 @@
+name: DevSecOps pipeline
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  secrets-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  sast-and-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install -r requirements.txt bandit pip-audit
+      - name: Analisis estatico (Bandit)
+        run: bandit -r app monitor lab -ll
+      - name: Auditoria de dependencias
+        run: pip-audit -r requirements.txt
+      - name: Pruebas
+        run: pytest -q tests
+
+  container-scan:
+    needs: [secrets-scan, sast-and-tests]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build de la imagen
+        run: docker build -t mgm-shield:${{ github.sha }} .
+      - name: Trivy (imagen)
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: mgm-shield:${{ github.sha }}
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+          exit-code: "1"
+
+  deploy-smoke-test:
+    needs: container-scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Desplegar en modo secure y probar
+        run: |
+          MGM_MODE=secure docker compose up -d --build helpdesk monitor
+          sleep 5
+          curl -sf http://localhost:5000/health
+          docker compose down -v

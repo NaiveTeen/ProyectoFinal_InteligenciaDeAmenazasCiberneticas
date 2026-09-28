@@ -1,0 +1,4 @@
+{"ts": "2026-09-28T02:34:44.468034+00:00", "event": "login_success", "user": "E1001", "ip": "10.0.0.11"}
+{"ts": "2026-09-28T02:35:24.649070+00:00", "event": "reset_requested", "employee": "E1002", "caller_claim": "Luis Prado", "ip": "198.51.100.77"}
+{"ts": "2026-09-28T02:35:24.800698+00:00", "event": "reset_success", "employee": "E1002", "ip": "198.51.100.77", "verified": false}
+{"ts": "2026-09-28T02:35:24.907361+00:00", "event": "login_success", "user": "E1002", "ip": "198.51.100.77"}

@@ -1,0 +1,9 @@
+{"ts": "2026-09-28T03:17:12.076976+00:00", "event": "login_success", "user": "E1001", "ip": "10.0.0.11"}
+{"ts": "2026-09-28T03:17:20.903450+00:00", "event": "reset_requested", "employee": "E1002", "caller_claim": "Luis Prado", "ip": "198.51.100.77"}
+{"ts": "2026-09-28T03:17:20.905417+00:00", "event": "reset_pending", "employee": "E1002", "ip": "198.51.100.77"}
+{"ts": "2026-09-28T03:17:20.909198+00:00", "event": "reset_requested", "employee": "E1002", "caller_claim": "Luis Prado", "ip": "198.51.100.77"}
+{"ts": "2026-09-28T03:17:20.910062+00:00", "event": "reset_denied", "employee": "E1002", "ip": "198.51.100.77", "reason": "bad_codes"}
+{"ts": "2026-09-28T03:17:20.913452+00:00", "event": "reset_requested", "employee": "E1002", "caller_claim": "Luis Prado", "ip": "198.51.100.77"}
+{"ts": "2026-09-28T03:17:20.914049+00:00", "event": "reset_denied", "employee": "E1002", "ip": "198.51.100.77", "reason": "bad_codes"}
+{"ts": "2026-09-28T03:17:20.927275+00:00", "event": "reset_requested", "employee": "E1002", "caller_claim": "Luis Prado", "ip": "198.51.100.77"}
+{"ts": "2026-09-28T03:17:20.927909+00:00", "event": "reset_denied", "employee": "E1002", "ip": "198.51.100.77", "reason": "bad_codes"}
